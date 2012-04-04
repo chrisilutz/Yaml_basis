@@ -1,0 +1,25 @@
+# Rewrite On #
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+Options +FollowSymlinks
+RewriteEngine on
+rewritecond %{http_host} ^primalscreamtattoo.com [nc]
+rewriterule ^(.*)$ http://www.primalscreamtattoo.com/$1 [r=301,nc]
+rewritecond %{http_host} ^primalscreamtattoo.de [nc]
+rewriterule ^(.*)$ http://www.primalscreamtattoo.com/$1 [r=301,nc]
+rewritecond %{http_host} ^www.primalscreamtattoo.de [nc]
+rewriterule ^(.*)$ http://www.primalscreamtattoo.com/$1 [r=301,nc]
+
+# Expire # 
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType application/x-javascript "access plus 1 month"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
