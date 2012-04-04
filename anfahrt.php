@@ -28,6 +28,9 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  	<script type="text/javascript"
+    src="http://maps.google.com/maps/api/js?sensor=false">
+	</script>
 	</head>
 <body>
 		
@@ -54,13 +57,27 @@
 		<!-- Content !-->
 	
 	<section class="">
-		<article class="">	
-				<!-- Mailer includes/mailer.php !-->
+		<div id="main" class="">
+			<div class="">
+				<h4>Anfahrt</h4>
+				<div id="map_canvas" style="width:100%; height:500px"></div>
+			</div>
 				
-				<?php include("includes/mailer.php") ?>
-				
-				<!-- Mailer Ende !-->
-		</article>
+			<article class="">
+				<div class="">
+					<div id="hcard-<?php echo NAME; ?>" class="vcard">
+						<div class="org"><?php  echo SITE_NAME; ?></div>
+ 						<span class="fn n"></span>
+ 						<div class="adr">
+							<div class="street-address"><?php echo STRASSE; ?></div>
+							<span class="postal-code"><?php echo PLZ; ?></span> <span class="locality"><?php echo ORT; ?></span>
+						</div>
+ 						<div class="tel"><?php echo PHONE; ?></div>
+ 						<a class="email" href="mailto:echo EMAIL;"><?php echo EMAIL; ?></a>
+					</div>
+				</div>
+			</article>
+		</div>
 	</section>
 			
 		<!-- Content Ende !-->
