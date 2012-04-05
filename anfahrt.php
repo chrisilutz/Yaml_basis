@@ -32,7 +32,7 @@
     src="http://maps.google.com/maps/api/js?sensor=false">
 	</script>
 	</head>
-<body>
+<body onload="initialize()">
 		
 		<!-- Skiplinks !-->
 	
@@ -52,7 +52,7 @@
 		
 	<?php echo $navi; ?>
 	
-		<!-- Navigation Ende!-->
+		<!-- Navigation Ende !-->
 		
 		<!-- Content !-->
 	
@@ -65,16 +65,13 @@
 				
 			<article class="">
 				<div class="">
-					<div id="hcard-<?php echo NAME; ?>" class="vcard">
-						<div class="org"><?php  echo SITE_NAME; ?></div>
- 						<span class="fn n"></span>
- 						<div class="adr">
-							<div class="street-address"><?php echo STRASSE; ?></div>
-							<span class="postal-code"><?php echo PLZ; ?></span> <span class="locality"><?php echo ORT; ?></span>
-						</div>
- 						<div class="tel"><?php echo PHONE; ?></div>
- 						<a class="email" href="mailto:echo EMAIL;"><?php echo EMAIL; ?></a>
-					</div>
+					
+		<!-- HCard http://microformats.org/ !-->			
+					
+					<?php include("includes/hcard.php"); ?>
+					
+		<!-- HCard Ende !-->
+		
 				</div>
 			</article>
 		</div>
@@ -87,9 +84,25 @@
 	<?php include("includes/footer.php"); ?>
       
      	<!-- Footer Ende !-->
-     
-     	<!-- Piwik Code !-->
-     
-     	<!-- Piwik Ende !-->
+		
+		<!-- Script Google Maps !-->     
+<script type="text/javascript">
+ function initialize() {
+    var mylatlng = new google.maps.LatLng(49.7996828, 9.9362095);
+    var myOptions = {
+      zoom: 16,
+      center: mylatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+             
+  var marker = new google.maps.Marker({
+      position: mylatlng, 
+      map: map, 
+      title:"DonC-Media"
+  })
+ };
+</script>
 </body>
 </html>

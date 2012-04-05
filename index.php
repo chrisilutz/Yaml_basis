@@ -67,8 +67,5 @@
       
      	<!-- Footer Ende !-->
      
-     	<!-- Piwik Code !-->
-     
-     	<!-- Piwik Ende !-->
 </body>
 </html>
