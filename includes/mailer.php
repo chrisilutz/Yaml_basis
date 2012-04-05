@@ -1,4 +1,4 @@
-							<?php
+<?php
 							
 							if($_POST['_abgeschickt']){
 /* Empfaenger */
@@ -6,8 +6,12 @@ $empfaenger = array(SITE_NAME.'<'.EMAIL.'>');
 
 
 /* Absender */
-$absender = $_POST['email'];
-
+			$absender = $_POST['email'];
+			$name = urldecode($_POST['name']);
+			$strasse = urldecode($_POST['strasse']);
+			$ort = urldecode($_POST['ort']);
+			$nachricht = urldecode($_POST['nachricht']);
+			
 /* Rueckantwort */
 $reply = EMAIL;
 
@@ -15,14 +19,22 @@ $reply = EMAIL;
 $subject = 'Mitteilung an '.SITE_NAME;
 
 /* Nachricht */
-$message = '<h5>Name: '.$_POST['name'].'</h5>
-<h5>Email: '.$_POST['email'].'<br /></h5>
-<h5>Mitteilung:<h5><p>'.htmlentities($_POST['message']).'<br /></p>
-<br /><br />
-<h5>Dies ist eine automatisch generierte Mail.<br />
-Wir treten bald pers&ouml;nlich mit Ihnen in Kontakt.<br /><br />
-Ihr '.SITE_NAME.'-Team.</h5>'
-;
+				echo '	<h5>Danke f&uuml;r Ihre Nachricht</h5>
+						<p>Ihre Angaben:</p>
+						<p>Name: '.$name.'</p><p>Strasse: '.$strasse.'</p>
+						<p>Ort: '.$ort.'</p>
+						<p>Email: '.$absender.'</p>
+						<p>Nachricht: '.$nachricht.'</p>';
+				$message = '<h5>Danke f&uuml;r Ihre Nachricht</h5>
+							<p>Ihre Angaben:</p>
+							<p>Name: '.$name.'</p><p>Strasse: '.$strasse.'</p>
+						<p>Ort: '.$ort.'</p>
+						<p>Email: '.$absender.'</p>
+						<p>Nachricht: '.$nachricht.'</p>
+						<p>Mit freundlichen Gr&uuml;&szlig;en<br /><b>'.SITE_NAME.'</b></p>						
+						<p>Diese Email wurde automatisch versendet.</p>'
+				;
+				
 
 
 
@@ -33,7 +45,7 @@ $headers .= 'From:' . $absender . "\n";
 $headers .= 'Reply-To:' . $reply . "\n";
 $headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
 $headers .= 'X-Sender-IP: ' . $REMOTE_ADDR . "\n";
-$headers .= "Content-type: text/html\n";
+$headers .= "Content-type: text/html; charset=utf-8\n";
 
 // Extrahiere Emailadressen
 $empfaengerString = implode(',', $empfaenger);
@@ -44,7 +56,7 @@ $headers .= 'Bcc: ' . $empfaengerBCCString . "\n";
 
 /* Verschicken der Mail */
 mail($empfaengerString, $subject, $message, $headers);
-echo "<section class='ym-form ym-full'><h4>Danke f&uuml;r Ihre Nachricht, wir setzen uns mit Ihnen in Verbindung</h4></section>";	
+	
 	}
 	
 else {						 
@@ -57,18 +69,28 @@ else {
     					<legend>Kontakt</legend>
     					<!-- Name -->
     					<div class="ym-fbox-text">
-  							<label for="name">Name</label>
-  							<input type="text" name="name" id="name" class="required" size="20"  minlength="2" />
+  							<label for="name">Name *</label>
+  							<input type="text" name="name" id="name" class="required" size="30"  minlength="2" />
 						</div>
 						<!-- Email -->
 							<div class="ym-fbox-text">
-  							<label for="email">Email</label>
-  							<input type="text" name="email" id="email" class="required email" size="20" />
+  							<label for="email">Email *</label>
+  							<input type="text" name="email" id="email" class="required email" size="30" />
+						</div>
+						<!-- Strasse -->
+							<div class="ym-fbox-text">
+  							<label for="strasse">Stra&szlig;e/Nr.</label>
+  							<input type="text" name="strasse" id="strasse" class="strasse" size="30" />
+						</div>
+						<!-- Ort -->
+							<div class="ym-fbox-text">
+  							<label for="ort">PLZ Ort</label>
+  							<input type="text" name="ort" id="ort" class="ort" size="30" />
 						</div>
 							<!-- Textfeld -->
 						<div class="ym-fbox-text">
-  							<label for="message">Ihre Nachricht</label>
-  							<textarea name="message" id="message" cols="30" rows="7"></textarea>
+  							<label for="nachricht">Ihre Nachricht</label>
+  							<textarea name="nachricht" id="nachricht" cols="30" rows="7"></textarea>
 						</div>
 							<!-- Buttons -->
 						<div class="ym-fbox-button">
